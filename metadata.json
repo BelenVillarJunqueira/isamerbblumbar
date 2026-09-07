@@ -1,0 +1,6 @@
+{
+  "name": "ISAMER OS - BB Import",
+  "description": "Sistema operativo de gestión e-commerce integral y sincronización en tiempo real para BB Import (bbimport.onrender.com) y Lumbar Fix (lumbar-fix.vercel.app): control de stock, ganancia diaria y automatización de envíos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
