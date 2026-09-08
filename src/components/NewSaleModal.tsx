@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { PaymentMethod } from '../types';
+import { metaPixelTracker } from '../lib/metaPixel';
 import {
   X,
   TrendingUp,
@@ -60,6 +61,18 @@ export const NewSaleModal: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successCode, setSuccessCode] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (isNewSaleModalOpen) {
+      try {
+        metaPixelTracker.initiateCheckout({
+          total: finalTotal || 30000,
+          numItems: cartItems.length || 1,
+          businessId: saleBusiness,
+        });
+      } catch {}
+    }
+  }, [isNewSaleModalOpen]);
+
   if (!isNewSaleModalOpen) return null;
 
   // Handle business store switch
@@ -102,9 +115,29 @@ export const NewSaleModal: React.FC = () => {
 
   const handleAddItem = (type: 'product' | 'combo') => {
     if (type === 'product' && availableProducts.length > 0) {
-      setCartItems([...cartItems, { type: 'product', id: availableProducts[0].id, quantity: 1 }]);
+      const prod = availableProducts[0];
+      setCartItems([...cartItems, { type: 'product', id: prod.id, quantity: 1 }]);
+      try {
+        metaPixelTracker.addToCart({
+          id: prod.id,
+          name: prod.name,
+          price: prod.sellingPrice,
+          quantity: 1,
+          businessId: saleBusiness,
+        });
+      } catch {}
     } else if (type === 'combo' && availableCombos.length > 0) {
-      setCartItems([...cartItems, { type: 'combo', id: availableCombos[0].id, quantity: 1 }]);
+      const combo = availableCombos[0];
+      setCartItems([...cartItems, { type: 'combo', id: combo.id, quantity: 1 }]);
+      try {
+        metaPixelTracker.addToCart({
+          id: combo.id,
+          name: combo.name,
+          price: combo.sellingPrice,
+          quantity: 1,
+          businessId: saleBusiness,
+        });
+      } catch {}
     }
   };
 

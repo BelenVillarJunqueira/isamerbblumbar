@@ -10,6 +10,7 @@ import {
   Settings,
   AlertCircle,
   Globe,
+  Radio,
 } from 'lucide-react';
 
 export const NavigationTabs: React.FC = () => {
@@ -64,6 +65,13 @@ export const NavigationTabs: React.FC = () => {
       icon: Users,
       badge: `${metrics.todayTotalClicks} clics`,
       badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+    },
+    {
+      id: 'meta_ads' as const,
+      label: 'Meta Ads & Pixel',
+      icon: Radio,
+      badge: 'Pixel Activo',
+      badgeColor: 'bg-[#00c8ff]/20 text-[#00c8ff] border-[#00c8ff]/40',
     },
     {
       id: 'settings' as const,

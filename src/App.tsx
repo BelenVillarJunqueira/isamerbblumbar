@@ -10,6 +10,7 @@ import { DailyReportSection } from './components/DailyReportSection';
 import { MonthlySalesSection } from './components/MonthlySalesSection';
 import { ClicksAndCRMSection } from './components/ClicksAndCRMSection';
 import { WebSyncSection } from './components/WebSyncSection';
+import { MetaAdsSection } from './components/MetaAdsSection';
 import { BusinessSettingsModal } from './components/BusinessSettingsModal';
 import { NewSaleModal } from './components/NewSaleModal';
 import { NewTaskModal } from './components/NewTaskModal';
@@ -124,6 +125,8 @@ const DashboardContent: React.FC = () => {
         {activeTab === 'monthly_sales' && <MonthlySalesSection />}
 
         {activeTab === 'clicks_crm' && <ClicksAndCRMSection />}
+
+        {activeTab === 'meta_ads' && <MetaAdsSection />}
 
         {activeTab === 'settings' && <BusinessSettingsModal />}
       </main>

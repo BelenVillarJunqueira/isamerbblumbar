@@ -21,6 +21,7 @@ import {
   initialClients,
   initialClickChannels,
 } from '../data/initialData';
+import { metaPixelTracker } from '../lib/metaPixel';
 
 interface AppContextType {
   // Config & Multi-tenant / White-label
@@ -108,8 +109,8 @@ interface AppContextType {
   };
 
   // Active View Tab
-  activeTab: 'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'settings';
-  setActiveTab: (tab: 'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'settings') => void;
+  activeTab: 'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'meta_ads' | 'settings';
+  setActiveTab: (tab: 'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'meta_ads' | 'settings') => void;
 
   // Web Synchronization & Real-time Integration with bbimport.onrender.com & lumbar-fix.vercel.app
   isSyncingWeb: boolean;
@@ -272,7 +273,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [activePriorityFilter, setActivePriorityFilter] = useState<PriorityLevel | 'all'>('all');
-  const [activeTab, setActiveTab] = useState<'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'settings'>('intelligence');
+  const [activeTab, setActiveTabRaw] = useState<'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'meta_ads' | 'settings'>('intelligence');
+  
+  const setActiveTab = (tab: 'intelligence' | 'tasks' | 'inventory' | 'daily_report' | 'monthly_sales' | 'clicks_crm' | 'sync' | 'meta_ads' | 'settings') => {
+    setActiveTabRaw(tab);
+    try {
+      metaPixelTracker.pageView(`Sección: ${tab}`);
+    } catch {}
+  };
+
   const [isNewSaleModalOpen, setIsNewSaleModalOpen] = useState(false);
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
 
@@ -646,6 +655,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             : c,
         ),
       );
+    }
+
+    // 5. Fire Meta Pixel Purchase Event
+    try {
+      metaPixelTracker.purchase({
+        orderId: newSale.code,
+        total: newSale.total,
+        contentIds: newSale.items.map((i) => i.itemId),
+        numItems: newSale.items.reduce((sum, i) => sum + i.quantity, 0),
+        businessId: newSale.businessId === 'lumbarfix' ? 'lumbarfix' : 'bbimport',
+        customerName: newSale.clientName,
+        paymentMethod: newSale.paymentMethod,
+      });
+    } catch (e) {
+      console.warn('Meta Pixel tracking purchase fallback:', e);
     }
 
     return { success: true, sale: newSale };

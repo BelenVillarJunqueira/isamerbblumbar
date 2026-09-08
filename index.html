@@ -4,14 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ISAMER OS - BB Import</title>
-    <meta name="description" content="Sistema operativo de gestión e-commerce integral y sincronización en tiempo real para BB Import (bbimport.onrender.com) y Lumbar Fix (lumbar-fix.vercel.app): control de stock, ganancia diaria y automatización de envíos." />
+    <meta name="description" content="Sistema operativo de gestión e-commerce integral y sincronización en tiempo real para BB Import (bbimport.onrender.com) y Lumbar Fix (lumbar-fix.vercel.app): control de stock, ganancia diaria, automatización de envíos y rastreo de eventos Meta Ads y Pixel de Facebook." />
     <meta property="og:title" content="ISAMER OS - BB Import" />
-    <meta property="og:description" content="Sistema operativo de gestión e-commerce integral y sincronización en tiempo real para BB Import (bbimport.onrender.com) y Lumbar Fix (lumbar-fix.vercel.app): control de stock, ganancia diaria y automatización de envíos." />
+    <meta property="og:description" content="Sistema operativo de gestión e-commerce integral y sincronización en tiempo real para BB Import (bbimport.onrender.com) y Lumbar Fix (lumbar-fix.vercel.app): control de stock, ganancia diaria, automatización de envíos y rastreo de eventos Meta Ads y Pixel de Facebook." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Meta Pixel Code Base -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      try {
+        fbq('init', '108492049281048'); // Default Meta Pixel ID for BB Import & Lumbar Fix
+        fbq('track', 'PageView');
+      } catch(e) {
+        console.warn('Meta Pixel fallback initialized safely');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -21,6 +21,8 @@ export const initialBusinessConfig: BusinessConfig = {
   enableStockAlerts: true,
   lowStockThresholdDefault: 6,
   whiteLabelLicense: 'LIC-ISAMER-DUAL-2026',
+  metaPixelIdBBImport: '108492049281048',
+  metaPixelIdLumbarFix: '219385019384712',
 };
 
 // CANALES Y TIENDAS 100% E-COMMERCE (CERO LOCALES A LA CALLE)
@@ -174,7 +176,7 @@ export const initialProducts: ProductItem[] = [
   {
     id: 'prod-lf-faja',
     sku: 'LF-FAJA-01',
-    name: 'Lumbar Fix® - Faja Descompresora Lumbar Neumática 360°',
+    name: 'Lumbar Fix® - Faja Descompresora Lumbar 360°',
     businessId: 'lumbarfix',
     category: 'Ortopedia Lumbar',
     costPrice: 14000,
@@ -279,7 +281,7 @@ export const initialCombos: ProductCombo[] = [
     sku: 'BBI-BUNDLE-3',
     name: 'Combo Profesional: 1x Máquina EX5 + Loción Post Afeitado',
     businessId: 'bbimport',
-    description: 'Loción post afeitada profesional 100ml + Kit Completo EX5.',
+    description: 'Loción post afeitado profesional 100ml + Kit Completo EX5.',
     components: [
       { productId: 'prod-ex5-blk', quantity: 1 },
       { productId: 'prod-acc-lotion', quantity: 1 },
@@ -291,22 +293,7 @@ export const initialCombos: ProductCombo[] = [
     localId: 'loc-bbimport',
     active: true,
   },
-  {
-    id: 'combo-master-barber',
-    sku: 'BBI-BUNDLE-4',
-    name: 'Combo Barber Máster: 2x Máquinas + Cuchilla T-Blade + Loción',
-    businessId: 'bbimport',
-    description: 'Pack premium: 2 cortadoras EX5 + 1 cuchilla repuesto 0mm + 1 loción 100ml.',
-    components: [
-      { productId: 'prod-ex5-blk', quantity: 1 },
-      { productId: 'prod-ex5-blu', quantity: 1 },
-      { productId: 'prod-acc-tblade', quantity: 1 },
-      { productId: 'prod-acc-lotion', quantity: 1 },
-    ],
-    sellingPrice: 68999,
-    localId: 'loc-bbimport',
-    active: true,
-  },
+
 
   // --- BUNDLES LUMBAR FIX ---
   {
@@ -314,7 +301,7 @@ export const initialCombos: ProductCombo[] = [
     sku: 'LF-BUNDLE-1',
     name: '1x Faja Lumbar Fix (Tratamiento Individual)',
     businessId: 'lumbarfix',
-    description: 'Faja descompresora lumbar con inflador manual + extensor de cintura.',
+    description: 'Faja descompresora lumbar + extensor de cintura.',
     components: [{ productId: 'prod-lf-faja', quantity: 1 }],
     sellingPrice: 20000,
     localId: 'loc-lumbarfix',

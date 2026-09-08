@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Client, StoreLocal, ClickChannel } from '../types';
+import { metaPixelTracker } from '../lib/metaPixel';
 import {
   MousePointerClick,
   Users,
@@ -71,6 +72,15 @@ export const ClicksAndCRMSection: React.FC = () => {
       tier: 'nuevo',
       notes: clientNotes.trim(),
     });
+
+    try {
+      metaPixelTracker.lead({
+        clientName: clientName.trim(),
+        clientPhone: clientPhone.trim(),
+        source: 'CRM ISAMER OS',
+        businessId: selectedBusiness === 'lumbarfix' ? 'lumbarfix' : 'bbimport',
+      });
+    } catch {}
 
     setIsNewClientOpen(false);
     setClientName('');
@@ -198,7 +208,7 @@ export const ClicksAndCRMSection: React.FC = () => {
                         </span>
                       </td>
 
-                      <td className="py-3 px-3 font-mono text-slate-400 text-[11px] truncate max-w-[200px]">
+                      <td className="py-3 px-3 font-mono text-slate-400 text-[11px] truncate max-w-50">
                         <a
                           href={chn.url}
                           target="_blank"

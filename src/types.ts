@@ -146,4 +146,6 @@ export interface BusinessConfig {
   enableStockAlerts: boolean;
   lowStockThresholdDefault: number;
   whiteLabelLicense: string;
+  metaPixelIdBBImport?: string;
+  metaPixelIdLumbarFix?: string;
 }
